@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="body">
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+
+</body>
+
+</html>
+
+
+<script>
+    
+    class Table {
+
+        static SortType() {
+            return  {ASC:1,DESC:2,NONE:3};
+        }
+        static DataType(){
+            return {Character: 1, String: 2, Integer: 3, Float: 3, Double: 4, Date: 5};
+        }
+        #table;
+        #thead;
+
+        #data;
+        #tbody;
+   
+        #tfooter;
+
+        constructor(element,attributes = null) {
+           
+           this.#table  = document.createElement("table");        
+           for (var attrib in attributes){
+            this.#table.setAttribute(attrib,attributes[attrib]);
+           }
+        element.appendChild(this.#table);
+        }
+
+      autoInitTable(tableHeaderObj = null, tableBodyObj = null, tableFooterObj = null){
+
+      }
+
+        setData(data){
+
+        }
+
+        getData(){
+            return this.#data;
+        }
+
+
+        initTableHeader(columnsObj, attributes = null) {
+            this.#thead  = document.createElement("thead");
+         
+         for (var attrib in attributes){
+          this.#thead.setAttribute(attrib,attributes[attrib]);
+         }
+         this.#table.appendChild(this.#thead);
+        
+         for (let columnObj of columnsObj){
+            this.addColumn(columnObj,attributes.headerCell);
+         }
+                
+        }
+
+        initTableBody() {
+
+        }
+        addColumn(columnObj,attributesObj) {
+
+        }
+        addRow(rowObj,attributesObj= null) {
+
+        }
+
+
+
+    }
+
+var body = document.getElementById("body");
+
+// a simple table 
+// var table = new Table(body);
+
+// a table can have attributes. you can add as many attrubute as you want. The attributes must be valid
+let attributes = {id:"idl",class:"table"};
+var table = new Table(body,attributes);
+
+
+
+let headerAttributes = {
+    HeaderRow: {
+        id:"id2",
+        class:"trClass"
+    },
+    HeaderCell:{
+        id:"sdf",
+        class:"sss"
+    },
+}
+let headerData=[
+{Name:"id",Caption:"ID", DataType:Table.DataType.Integer,SortType: Table.SortType.ASC, Display:true},
+{Name:"firstName",Caption:"First Name", DataType:Table.DataType.String,SortType: Table.SortType.NONE, Display:true, Link: null},
+{Name:"lastName",Caption:"Last Name", DataType:Table.DataType.String,SortType: Table.SortType.NONE, Display:true, Link: null},
+{Name:"phone",Caption:"Phone", DataType:Table.DataType.Integer,SortType: Table.SortType.NONE, Display:true, Link : null}
+];
+
+table.initTableHeader( headerData,headerAttributes);
+
+</script>
