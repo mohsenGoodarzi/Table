@@ -2,43 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 
 <body id="body">
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 
@@ -46,101 +46,266 @@
 
 
 <script>
-    
-    class Table {
 
-        static SortType() {
-            return  {ASC:1,DESC:2,NONE:3};
-        }
-        static DataType(){
-            return {Character: 1, String: 2, Integer: 3, Float: 3, Double: 4, Date: 5};
-        }
-        #table;
-        #thead;
+  class Table {
 
-        #data;
-        #tbody;
-   
-        #tfooter;
+    static get SortType() {
+      return { ASC: 1, DESC: 2, NONE: 3 };
+    }
 
-        constructor(element,attributes = null) {
-           
-           this.#table  = document.createElement("table");        
-           for (var attrib in attributes){
-            this.#table.setAttribute(attrib,attributes[attrib]);
-           }
-        element.appendChild(this.#table);
-        }
-
-      autoInitTable(tableHeaderObj = null, tableBodyObj = null, tableFooterObj = null){
-
-      }
-
-        setData(data){
-
-        }
-
-        getData(){
-            return this.#data;
-        }
+    static get DataType() {
+      return { CHARACTER: 1, STRING: 2, INTEGER: 3, FLOAT: 3, DOUBLE: 4, DATE: 5, MAIL: 6, PHONE: 7 };
+    }
 
 
-        initTableHeader(columnsObj, attributes = null) {
-            this.#thead  = document.createElement("thead");
-         
-         for (var attrib in attributes){
-          this.#thead.setAttribute(attrib,attributes[attrib]);
-         }
-         this.#table.appendChild(this.#thead);
-        
-         for (let columnObj of columnsObj){
-            this.addColumn(columnObj,attributes.headerCell);
-         }
-                
-        }
 
-        initTableBody() {
+    #table;
+    #thead;
 
-        }
-        addColumn(columnObj,attributesObj) {
+    #data;
+    #tbody;
 
-        }
-        addRow(rowObj,attributesObj= null) {
+    #tfooter;
 
-        }
+    #headerData;
 
+    constructor(attributes = {}) {
 
+      this.#table = document.createElement("table");
+      this.setAttributes(this.#table, attributes);
 
     }
 
-var body = document.getElementById("body");
+    getHTMLTable() {
+      return this.#table;
+    }
 
-// a simple table 
-// var table = new Table(body);
+    setAttributes(element, attributes) {
+      for (let attribute in attributes) {
+        console.log(attribute, "    ", attributes[attribute]);
+        element.setAttribute(attribute, attributes[attribute]);
+      }
+    }
 
-// a table can have attributes. you can add as many attrubute as you want. The attributes must be valid
-let attributes = {id:"idl",class:"table"};
-var table = new Table(body,attributes);
+    initHeader(columnsData, attributes = {}) {
+
+      this.#headerData = columnsData;
+
+      // creates thead element and adds to the table 
+      this.#thead = document.createElement("thead");
+      this.setAttributes(this.#thead, attributes.Header);
+
+      // adds a row to the header
+      let headerRow = document.createElement("tr");
+      this.setAttributes(headerRow, attributes.HeaderRow);
+      this.#thead.appendChild(headerRow);
+
+
+      //adds cells to the header row
+      for (let col in columnsData) {
+        let headerCell = document.createElement("th");
+        this.setAttributes(headerCell, attributes.HeaderCell);
+
+        if (columnsData[col].Display === false) {
+          headerCell.setAttribute("style", "display:none;");
+        }
+
+        if (columnsData[col].Link === null) {
+          headerCell.innerText = columnsData[col].Caption || "";
+        } else {
+          let link = document.createElement("a");
+          link.setAttribute("href", columnsData[col].Link);
+          link.innerText = columnsData[col].Caption || "";
+          headerCell.appendChild(link);
+        }
+
+        headerRow.appendChild(headerCell);
+      }
+
+      // adds all above to the table
+      this.#table.appendChild(this.#thead);
+
+    }
+
+
+    initBody(bodyData, attributes = {}) {
+
+      this.#tbody = document.createElement("tbody");
+      this.setAttributes(this.#tbody, attributes.Body);
+      this.#table.appendChild(this.#tbody);
+
+      for (let rowData of bodyData) {
+        let rowElement = this.createRow(rowData, attributes);
+        this.#tbody.appendChild(rowElement);
+      }
+    }
+
+
+    createRow(rowData, attributes = {}) {
+
+      let rowElement = document.createElement("tr");
+      this.setAttributes(rowElement, attributes.BodyRow);
+      for (let cellName in rowData) {
+
+        let cellElement = document.createElement("td");
+        this.setAttributes(cellElement, attributes.BodyCell);
+
+        // assigns rowData.Links to an empty object, if the user took off the Links property from rows or assigned it to null
+        rowData.Links = rowData.Links || {};
+
+        // adds links to the cells if there is any
+        if (rowData.Links[cellName] !== undefined && rowData.Links[cellName] !== null) {
+          console.log("Adding link to ", rowData.Links[cellName]);
+          let link = document.createElement("a");
+          link.innerText = rowData[cellName];
+
+          // checks if the data type is mail or phone then adds appropriate tags to them.
+          if (this.#headerData[cellName].DataType === Table.DataType.PHONE) {
+            rowData.Links[cellName] = "phone:" + rowData.Links[cellName];
+          } else if (this.#headerData[cellName].DataType === Table.DataType.MAIL) {
+            rowData.Links[cellName] = "mail:" + rowData.Links[cellName];
+          }
+
+          link.setAttribute("href", rowData.Links[cellName]);
+          cellElement.appendChild(link);
+
+        } else {
+          cellElement.innerText = rowData[cellName];
+        }
+        // checks if the columns' data should be displayed 
+        if (this.#headerData[cellName].Display === false) {
+          cellElement.setAttribute("style", "display: none;");
+        }
+
+
+        rowElement.appendChild(cellElement);
+
+      }
+      return rowElement;
+    }
+
+
+    initFooter(footerData, attributes = {}) {
+
+      attributes = attributes || {};
+
+    }
+    autoInitTable(tableHeaderObj = null, tableBodyObj = null, tableFooterObj = null) {
+
+    }
+
+    setData(data) {
+
+    }
+
+    getData() {
+      return this.#data;
+    }
+
+
+    initTableHeader(columnsObj, attributes = null) {
+      this.#thead = document.createElement("thead");
+
+      for (var attrib in attributes) {
+        this.#thead.setAttribute(attrib, attributes[attrib]);
+      }
+      this.#table.appendChild(this.#thead);
+
+      for (let columnObj of columnsObj) {
+        this.addColumn(columnObj, attributes.headerCell);
+      }
+
+    }
+
+    initTableBody() {
+
+    }
+    addColumn(columnObj, attributesObj) {
+
+    }
+    addRow(rowObj, attributesObj = null) {
+
+    }
 
 
 
-let headerAttributes = {
+  }
+
+  console.log("dddddddddd", Table.DataType.PHONE);
+  // a simple table 
+  // var table = new Table(body);
+
+  // a table can have attributes. you can add as many attrubute as you want. The attributes must be valid
+  let attributes = { id: "idl", class: "table" };
+  var table = new Table(attributes);
+
+  var body = document.getElementById("body");
+  body.appendChild(table.getHTMLTable());
+
+  let headerAttributes = {
+    Header: {
+      class: "aaa",
+      id: "ss"
+    },
     HeaderRow: {
-        id:"id2",
-        class:"trClass"
+      id: "id2",
+      class: "trClass"
     },
-    HeaderCell:{
-        id:"sdf",
-        class:"sss"
+    HeaderCell: {
+      class: "cell-info"
     },
-}
-let headerData=[
-{Name:"id",Caption:"ID", DataType:Table.DataType.Integer,SortType: Table.SortType.ASC, Display:true},
-{Name:"firstName",Caption:"First Name", DataType:Table.DataType.String,SortType: Table.SortType.NONE, Display:true, Link: null},
-{Name:"lastName",Caption:"Last Name", DataType:Table.DataType.String,SortType: Table.SortType.NONE, Display:true, Link: null},
-{Name:"phone",Caption:"Phone", DataType:Table.DataType.Integer,SortType: Table.SortType.NONE, Display:true, Link : null}
-];
+  }
+  let headerData = {
+    Id: { Caption: "ID", DataType: Table.DataType.INTEGER, SortType: Table.SortType.ASC, Display: true, Link: null },
+    FirstName: { Caption: "First Name", DataType: Table.DataType.STRING, SortType: Table.SortType.NONE, Display: true, Link: "https://google.com" },
+    LastName: { Caption: "Last Name", DataType: Table.DataType.STRING, SortType: Table.SortType.NONE, Display: true, Link: null },
+    Phone: { Caption: "Phone", DataType: Table.DataType.PHONE, SortType: Table.SortType.NONE, Display: true, Link: null },
+    // this is optional. This way you can add edit and remove button to each row.
+    Edit: { Display: true },
+    Remove: { Caption: "", Display: true },
+    Links: { Display: false }
+  };
+  bodyData = [
+    {
+      Id: 1,
+      FirstName: "Joe",
+      LastName: "Tribiani(fully linked)",
+      Phone: 1234,
+      Edit: "Edit Row",
+      Remove: "Delete Row",
+      Links: {
+        Id: "id_link",
+        FirstName: "firstname_link",
+        LastName: "lastname_link",
+        Phone: "phone_link",
+        Edit: "/Edit?id=5",
 
-table.initTableHeader( headerData,headerAttributes);
+        Remove: "/Remove?id=5"
+      }
+    },
+    {
+      Id: 3, FirstName: "Joe", LastName: "Tribiani(lastname has no link)", Phone: 9101, Edit: "Edit Row",
+      /*To remove the remove link, take off the remove property or set the property to null. */
+      Remove: "Delete Row",
+      Links: {
+        Id: "abc",
+        FirstName: "abc",
+        /* last name has no link */
+        Phone: "phone_link",
+        Edit: "/Edit?id=5",
+        /* To disable the link, take off the delete link*/
+        Remove: "/Remove?id=5"
+      }
+    },
+    { Id: 2, FirstName: "Joe", LastName: "Tribiani(links is null)", Phone: 5678, Links: null },
+    { Id: 5, FirstName: "Joe", LastName: "Tribiani(links is not defined)", Phone: 5678 },
+    { Id: 4, FirstName: "Joe", LastName: "Tribiani(id's link is null)", Phone: 1213, Links: { Id: null, FirstName: "abc", LastName: "Abc", Phone: "phone_link" } }
+
+
+
+  ];
+
+  table.initHeader(headerData, headerAttributes);
+  table.initBody(bodyData);
 
 </script>
