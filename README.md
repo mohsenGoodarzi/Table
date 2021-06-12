@@ -27,11 +27,7 @@ llet headerData = {
     LastName: { Caption: "Last Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: null },
     Phone: { Caption: "Phone", DataType: Type.DataType.PHONE, SortType: Type.OrderType.NONE, Display: true, Link: null }
   };
-    // this is optional. This way you can add edit and remove button to each row.
-    Edit: { Display: true },
-    Remove: { Display: true },
-    Links: { Display: false }
-  };
+   
   let headerAttributes = {
     Header: {
       class: "header-info",
@@ -46,7 +42,6 @@ llet headerData = {
     },
   }
   table.initHeader(headerData, headerAttributes);
-  table.initBody(bodyData);
 ```
 - Note : If you don't have defined attributes just run table.initHeader(headerData);
 - Notice that in the headerData object the Id object does not have Link property and FirstName object has the link set.
