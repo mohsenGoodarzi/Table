@@ -19,28 +19,35 @@
 <script>
 
  
-// works just fine
-console.log(typeof(2.4));
 
 // user need to provide the value
 let value = "Mo"; 
 // user need to provid the column name
 let propertyName = "Name";
 
-let data = [{Name:"Alice",Age:32},
+let data = [{Name:"Nicole",Age:35},
+  {Name:"Alice",Age:32},
             {Name:"Mohsen",Age:33},
             {Name:"Joe",Age:34}];
 
   let  result  =  [];
   
   // test filter data;
-  
-
-// filter needs different predicates because we have different data types.
-// string type needs regex, phone type needs regex, email needs regex, year, month and day need exact number 
-  
-
-
+  let filter = new Filter();
+let filteredData = filter.filter(data, propertyName, value);
+console.log(filteredData);
+console.log("----------- orginal data-----------");
+console.log(data);
+console.log("-----------------------------------");
+let sort = new Sort();
+sort.sort(data, propertyName, Type.DataType.ASC);
+console.log("----------- sorted data------------");
+console.log(data);
+console.log("-----------------------------------");
+sort.sort(data, propertyName, Type.DataType.DESC);
+console.log("----------- sorted data------------");
+console.log(data);
+console.log("-----------------------------------");
 </script>
 
 
@@ -71,10 +78,10 @@ let data = [{Name:"Alice",Age:32},
     },
   }
   let headerData = {
-    Id: { Caption: "ID", DataType: Type.getDataType.MUMBER, SortType: Type.getSortType.ASC, Display: true, Link: null },
-    FirstName: { Caption: "First Name", DataType: Type.getDataType.STRING, SortType: Type.getSortType.NONE, Display: true, Link: "https://google.com" },
-    LastName: { Caption: "Last Name", DataType: Type.getDataType.STRING, SortType: Type.getSortType.NONE, Display: true, Link: null },
-    Phone: { Caption: "Phone", DataType: Type.getDataType.PHONE, SortType: Type.getSortType.NONE, Display: true, Link: null },
+    Id: { Caption: "ID", DataType: Type.DataType.MUMBER, SortType: Type.OrderType.ASC, Display: true, Link: null },
+    FirstName: { Caption: "First Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: "https://google.com" },
+    LastName: { Caption: "Last Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: null },
+    Phone: { Caption: "Phone", DataType: Type.DataType.PHONE, SortType: Type.OrderType.NONE, Display: true, Link: null },
     // this is optional. This way you can add edit and remove button to each row.
     Edit: { Display: true },
     Remove: { Display: true },

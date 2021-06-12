@@ -1,10 +1,10 @@
 
 class Type {
-  static get getSortType() {
+  static  get OrderType() {
     return { ASC: 1, DESC: 2, NONE: 3 };
   }
-  static get getDataType() {
-    return { CHARACTER: 1, STRING: 2, NUMBER: 3, DATE: 5, MAIL: 6, PHONE: 7 };
+  static  get DataType () {
+    return { STRING: "string", NUMBER: "number", DATE: "date", MAIL: "mail", PHONE: "phone" };
   }
 };
 
@@ -19,10 +19,11 @@ class Filter {
     return this.#regExp;
   }
 
-
   filter(data, propertyName, value) {
-    let filteredData = [];
-    if (typeof (row[propertyName]) === "number") {
+    let filteredData = null;
+
+    if (typeof (data[0][propertyName]) === Type.DataType.NUMBER) {
+
       filteredData = data.filter(row => {
         if (row[propertyName] === value) {
           return true;
@@ -32,12 +33,11 @@ class Filter {
       });
     } else
       // used for string types 
-      if (typeof (row[propertyName]) === "string") {
+      if (typeof (data[0][propertyName]) === Type.DataType.STRING) {
         //use regex here
         this.#regExp = this.#regExp || new RegExp(value + "+", "gi");
-
         filteredData = data.filter(row => {
-          if (row[propertyName].match(regExp) !== null) {
+          if (row[propertyName].match(this.#regExp) !== null) {
             return true;
           }
           else {
@@ -45,6 +45,7 @@ class Filter {
           }
         });
       }
+      return filteredData;
   }
 };
 
@@ -66,7 +67,7 @@ class Sort {
           else {
             result = -1;
           }
-          if (sortType === "DSC") {
+          if (sortType === Type.DataType.DESC) {
             result *= -1;
           }
           return result;
@@ -76,7 +77,7 @@ class Sort {
       case "number": {
         data.sort((firstRow, secondRow) => {
           let result = firstRow[sortBy] - secondRow[sortBy];
-          if (sortType === "DSC") {
+          if (sortType === Type.DataType.DESC) {
             result *= -1;
           }
           return result;
@@ -85,10 +86,10 @@ class Sort {
 
         break;
       case "date": {
-        data.sort(function (firstRow, secondRow) {
+        data.sort((firstRow, secondRow)=> {
           let result = new Date(firstRow[sortBy]) - new Date(secondRow[sortBy]);
 
-          if (sortType === "DSC") {
+          if (sortType === Type.DataType.DESC) {
             result *= -1;
           }
           return result;
@@ -199,9 +200,9 @@ class Table {
         link.innerText = rowData[cellName];
 
         // checks if the data type is mail or phone then adds appropriate tags to them.
-        if (this.#headerData[cellName].DataType === Type.getDataType.PHONE) {
+        if (this.#headerData[cellName].DataType === Type.DataType.PHONE) {
           rowData.Links[cellName] = "phone:" + rowData.Links[cellName];
-        } else if (this.#headerData[cellName].DataType === Type.getDataType.MAIL) {
+        } else if (this.#headerData[cellName].DataType === Type.DataType.MAIL) {
           rowData.Links[cellName] = "mail:" + rowData.Links[cellName];
         }
 
