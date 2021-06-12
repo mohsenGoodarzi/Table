@@ -176,12 +176,16 @@ let headerData = {
         Link: "https://google.com" 
     },
   };
-bodyData = [
+let bodyData = [
     {
       Id: 1,
       FirstName: "Joe",
-     
     }
     ];
-
 ```
+##### - Footer
+```JavaScript
+ let dataFooter = { FirstGap: {}, Id: { Caption: "Number of people: " }, SecondGap: {}, Sum: { Caption: 5 } };
+  table.initFooter(dataFooter);
+```
+
