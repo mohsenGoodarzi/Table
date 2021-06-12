@@ -64,7 +64,21 @@ console.log("-----------------------------------");
   var body = document.getElementById("body");
   body.appendChild(table.getHTMLTable());
 
+  let headerData = {
+    Id: { Caption: "ID", DataType: Type.DataType.MUMBER, SortType: Type.OrderType.ASC, Display: true },
+    FirstName: { Caption: "First Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: "https://google.com" },
+    LastName: { Caption: "Last Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: null },
+    Phone: { Caption: "Phone", DataType: Type.DataType.PHONE, SortType: Type.OrderType.NONE, Display: true, Link: null }
+  };
+    
+    // this is optional. This way you can add edit and remove button to each row.
+   // Edit: { Display: true },
+   // Remove: { Display: true },
+   // Links: { Display: false }
 
+
+  table.initHeader(headerData);
+  //table.initBody(bodyData);
 /*
 
   let headerAttributes = {
@@ -80,16 +94,7 @@ console.log("-----------------------------------");
       class: "cell-info"
     },
   }
-  let headerData = {
-    Id: { Caption: "ID", DataType: Type.DataType.MUMBER, SortType: Type.OrderType.ASC, Display: true, Link: null },
-    FirstName: { Caption: "First Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: "https://google.com" },
-    LastName: { Caption: "Last Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: null },
-    Phone: { Caption: "Phone", DataType: Type.DataType.PHONE, SortType: Type.OrderType.NONE, Display: true, Link: null },
-    // this is optional. This way you can add edit and remove button to each row.
-    Edit: { Display: true },
-    Remove: { Display: true },
-    Links: { Display: false }
-  };
+  
   bodyData = [
     {
       Id: 1,
@@ -127,8 +132,7 @@ console.log("-----------------------------------");
     { Id: 4, FirstName: "Joe", LastName: "Tribiani(id's link is null)", Phone: 1213, Links: { Id: null, FirstName: "abc", LastName: "Abc", Phone: "phone_link" } }
   ];
 
-  table.initHeader(headerData, headerAttributes);
-  table.initBody(bodyData);
+  
 
   let dataFooter = { FirstGap: {}, Id: { Caption: "summery: " }, SecondGap: {}, Sum: { Caption: 2000 } };
   table.initFooter(dataFooter);
