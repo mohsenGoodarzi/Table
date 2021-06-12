@@ -65,10 +65,32 @@ console.log("-----------------------------------");
   body.appendChild(table.getHTMLTable());
 
   let headerData = {
-    Id: { Caption: "ID", DataType: Type.DataType.MUMBER, SortType: Type.OrderType.ASC, Display: true },
-    FirstName: { Caption: "First Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: "https://google.com" },
-    LastName: { Caption: "Last Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: null },
-    Phone: { Caption: "Phone", DataType: Type.DataType.PHONE, SortType: Type.OrderType.NONE, Display: true, Link: null }
+    Id: { 
+        Caption: "ID",
+        DataType: Type.DataType.MUMBER,
+        SortType: Type.OrderType.ASC,
+        Display: true 
+    },
+    FirstName: { 
+        Caption: "First Name", 
+        DataType: Type.DataType.STRING, 
+        SortType: Type.OrderType.NONE, 
+        Display: true, 
+        Link: "https://google.com" 
+    },
+    LastName: { 
+        Caption: "Last Name",
+        DataType: Type.DataType.STRING, 
+        SortType: Type.OrderType.NONE, 
+        Display: true, 
+        Link: null 
+    },
+    Phone: { Caption: "Phone",
+    DataType: Type.DataType.PHONE, 
+    SortType: Type.OrderType.NONE,
+     Display: true, 
+     Link: null 
+    }
   };
     
     // this is optional. This way you can add edit and remove button to each row.
@@ -81,13 +103,9 @@ console.log("-----------------------------------");
       id: "header",
       user_added_attribute:"leave a value"
     },
-    HeaderRow: {
-      id: "row",
-      class: "class-name"
-    },
     HeaderCell: {
       class: "cell-info"
-    },
+    }
   }
 
   table.initHeader(headerData,headerAttributes);

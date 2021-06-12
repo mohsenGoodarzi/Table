@@ -21,11 +21,35 @@ let attributes = { id: "mainTable", class: "table" };
 #### - How to add header to the table
   
 ```JavaScript
-llet headerData = {
-    Id: { Caption: "ID", DataType: Type.DataType.MUMBER, SortType: Type.OrderType.ASC, Display: true },
-    FirstName: { Caption: "First Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: "https://google.com" },
-    LastName: { Caption: "Last Name", DataType: Type.DataType.STRING, SortType: Type.OrderType.NONE, Display: true, Link: null },
-    Phone: { Caption: "Phone", DataType: Type.DataType.PHONE, SortType: Type.OrderType.NONE, Display: true, Link: null }
+let headerData = {
+    Id: { 
+        Caption: "ID",
+        DataType: Type.DataType.MUMBER,
+        SortType: Type.OrderType.ASC,
+        // does not have link
+        Display: true 
+    },
+    FirstName: { 
+        Caption: "First Name", 
+        DataType: Type.DataType.STRING, 
+        SortType: Type.OrderType.NONE, 
+        Display: true, 
+        Link: "https://google.com" 
+    },
+    LastName: { 
+        Caption: "Last Name",
+        DataType: Type.DataType.STRING, 
+        SortType: Type.OrderType.NONE, 
+        Display: true, 
+        Link: null 
+    },
+    Phone: { 
+        Caption: "Phone", 
+        DataType: Type.DataType.PHONE, 
+        SortType: Type.OrderType.NONE, 
+        Display: true, 
+        Link: null 
+    }
   };
    
   let headerAttributes = {
@@ -40,13 +64,13 @@ llet headerData = {
     },
     HeaderCell: {
       class: "cell-info"
-    },
+    }
   }
   table.initHeader(headerData, headerAttributes);
 ```
 - Notice in the header data object; Id object does not have a Link property, and the FirstName has the link set. In the rest, the Link property is set to null. So You can either set the link property to null or remove it from the header object.
 - You can add as many attributes as you want. If there are no attributes for any section, just remove it from headerAttribute object or set it to null. For example: 
-
+```JavaScript
 let headerAttributes = {
     Header: {
       class: "header-info",
@@ -55,11 +79,10 @@ let headerAttributes = {
     },
     HeaderCell: {
       class: "cell-info"
-    },
+    }
   }
-
+```
 - Note : If you don't have defined attributes just run table.initHeader(headerData);
-
 
 #### - Result
 
