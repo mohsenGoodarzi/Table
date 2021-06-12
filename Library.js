@@ -56,7 +56,7 @@ class Sort {
     let dataType = typeof data[0][columnName];
 
     switch (dataType) {
-      case "string": {
+      case Type.DataType.STRING: {
         data.sort((firstRow, secondRow) => {
           let firstValue = firstRow[columnName].toLowerCase();
           let secondValue = secondRow[columnName].toLowerCase();
@@ -74,7 +74,7 @@ class Sort {
         });
       }
         break;
-      case "number": {
+      case Type.DataType.NUMBER: {
         data.sort((firstRow, secondRow) => {
           let result = firstRow[sortBy] - secondRow[sortBy];
           if (sortType === Type.DataType.DESC) {
@@ -85,7 +85,7 @@ class Sort {
       }
 
         break;
-      case "date": {
+      case Type.DataType.DATE: {
         data.sort((firstRow, secondRow)=> {
           let result = new Date(firstRow[sortBy]) - new Date(secondRow[sortBy]);
 
