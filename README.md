@@ -44,11 +44,19 @@ llet headerData = {
   table.initHeader(headerData, headerAttributes);
 ```
 - Note : If you don't have defined attributes just run table.initHeader(headerData);
-- Notice that in the headerData object the Id object does not have Link property and FirstName object has the link set.
+- Notice in the header data object; Id object does not have a Link property, and the FirstName has the link set. So You can set the link property to null or take it off.
 
 #### - Result
 
 ```HTML
-
-
+<table id="mainTable" class="table">
+    <thead class="header-info" id="header">
+        <tr id="row" class="class-name">
+            <th class="cell-info">ID</th>
+            <th class="cell-info"><a href="https://google.com">First Name</a></th>
+            <th class="cell-info">Last Name</th>
+            <th class="cell-info">Phone</th>
+        </tr>
+    </thead>
+</table>
 ```

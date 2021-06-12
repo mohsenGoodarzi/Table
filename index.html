@@ -75,9 +75,21 @@ console.log("-----------------------------------");
    // Edit: { Display: true },
    // Remove: { Display: true },
    // Links: { Display: false }
+   let headerAttributes = {
+    Header: {
+      class: "header-info",
+      id: "header"
+    },
+    HeaderRow: {
+      id: "row",
+      class: "class-name"
+    },
+    HeaderCell: {
+      class: "cell-info"
+    },
+  }
 
-
-  table.initHeader(headerData);
+  table.initHeader(headerData,headerAttributes);
   //table.initBody(bodyData);
 /*
 
