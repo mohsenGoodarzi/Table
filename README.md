@@ -188,4 +188,62 @@ let bodyData = [
  let dataFooter = { FirstGap: {}, Id: { Caption: "Number of people: " }, SecondGap: {}, Sum: { Caption: 5 } };
   table.initFooter(dataFooter);
 ```
-
+###### - Result
+```HTML
+<table id="mainTable" class="table">
+    <thead class="aaa" id="ss">
+        <tr id="id2" class="trClass">
+            <th class="cell-info">ID</th>
+            <th class="cell-info"><a href="https://google.com">First Name</a></th>
+            <th class="cell-info">Last Name</th>
+            <th class="cell-info">Phone</th>
+            <th class="cell-info" style="display:none;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="id_link">1</a></td>
+            <td><a href="firstname_link">Joe</a></td>
+            <td><a href="lastname_link">Last Name(fully linked)</a></td>
+            <td><a href="phone:phone_link">10001</a></td>
+            <td style="display: none;">[object Object]</td>
+        </tr>
+        <tr>
+            <td><a href="leave a link">2</a></td>
+            <td><a href="leave a link">Jack</a></td>
+            <td>Last Name (lastname has no link)</td>
+            <td><a href="phone:leave a link">9101</a></td>
+            <td style="display: none;">[object Object]</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Alice</td>
+            <td>Last Name(links is null)</td>
+            <td>5678</td>
+            <td style="display: none;">[object Object]</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Sam</td>
+            <td>Last Name(links is not defined)</td>
+            <td>5678</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><a href="leave a link">Peter</a></td>
+            <td><a href="leave a link">Last Name(id's link is null)</a></td>
+            <td><a href="phone:leave a link">1234</a></td>
+            <td style="display: none;">[object Object]</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td>Number of people: </td>
+            <td></td>
+            <td>5</td>
+        </tr>
+    </tfoot>
+</table>
+```
+- Notice in each row there is <td style="display: none;">[object Object]</td>. This is an issue which will be addressed in the next update.
