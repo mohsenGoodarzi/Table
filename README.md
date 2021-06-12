@@ -2,7 +2,7 @@
 
 ## Table
 
-#### - A simple Html table tag
+### - A simple Html table tag
 ```javascript
 var table = new Table();
 var body = document.getElementById("body");
@@ -13,12 +13,12 @@ var body = document.getElementById("body");
 let attributes = { id: "mainTable", class: "table" };
   var table = new Table(attributes);
 ```
-##### - Result
+###### - Result
 ```HTML
 <table id="mainTable" class="table"></table>
 ```
 
-#### - How to add header to the table
+##### - How to add header to the table
   
 ```JavaScript
 let headerData = {
@@ -84,7 +84,7 @@ let headerAttributes = {
 ```
 - Note : If you don't have defined attributes just run table.initHeader(headerData);
 
-#### - Result
+###### - Result
 
 ```HTML
 <table id="mainTable" class="table">
@@ -98,3 +98,63 @@ let headerAttributes = {
     </thead>
 </table>
 ```
+##### Tale Body
+
+```javascript
+
+  bodyData = [
+    {
+      Id: 1,
+      FirstName: "Joe",
+      LastName: "Tribiani(fully linked)",
+      Phone: 10001,
+      Links: {
+        Id: "id_link",
+        FirstName: "firstname_link",
+        LastName: "lastname_link",
+        Phone: "phone_link"
+      }
+    },
+    { 
+        Id: 2, 
+        FirstName: "Joe", 
+        LastName: "Tribiani(lastname has no link)", 
+        Phone: 9101
+        Links: {
+            Id: "abc",
+            FirstName: "abc",
+            // last name has no link 
+            Phone: "phone_link",
+            Edit: "/Edit?id=5"
+            }
+    },
+    { 
+        Id: 3, 
+        FirstName: "Joe", 
+        LastName: "Tribiani(links is null)", 
+        Phone: 5678, 
+        // Links set to null
+        Links: null 
+    },
+    { 
+        Id: 4, 
+        FirstName: "Joe", 
+        LastName: "Tribiani(links is not defined)", 
+        Phone: 5678 
+        // Links property removed
+    },
+    { 
+        Id: 5, 
+        FirstName: "Joe", 
+        LastName: "Tribiani(id's link is null)", 
+        Phone: 1213, 
+        Links: { 
+            Id: null, 
+            FirstName: "abc", 
+            LastName: "Abc", 
+            Phone: "phone_link" 
+            } 
+    }
+  ];
+```
+- Every cell in the row can have a link. You can set the links to the null or remove it. 
