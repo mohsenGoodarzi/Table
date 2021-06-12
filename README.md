@@ -31,7 +31,8 @@ llet headerData = {
   let headerAttributes = {
     Header: {
       class: "header-info",
-      id: "header"
+      id: "header",
+      user_added_attribute:"leave a value"
     },
     HeaderRow: {
       id: "row",
@@ -43,8 +44,22 @@ llet headerData = {
   }
   table.initHeader(headerData, headerAttributes);
 ```
+- Notice in the header data object; Id object does not have a Link property, and the FirstName has the link set. In the rest, the Link property is set to null. So You can either set the link property to null or remove it from the header object.
+- You can add as many attributes as you want. If there are no attributes for any section, just remove it from headerAttribute object or set it to null. For example: 
+
+let headerAttributes = {
+    Header: {
+      class: "header-info",
+      id: "header",
+      user_added_attribute:"leave a value"
+    },
+    HeaderCell: {
+      class: "cell-info"
+    },
+  }
+
 - Note : If you don't have defined attributes just run table.initHeader(headerData);
-- Notice in the header data object; Id object does not have a Link property, and the FirstName has the link set. So You can set the link property to null or take it off.
+
 
 #### - Result
 
