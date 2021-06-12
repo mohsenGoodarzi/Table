@@ -69,6 +69,7 @@ console.log("-----------------------------------");
         Caption: "ID",
         DataType: Type.DataType.MUMBER,
         SortType: Type.OrderType.ASC,
+        // does not have link
         Display: true 
     },
     FirstName: { 
@@ -85,12 +86,15 @@ console.log("-----------------------------------");
         Display: true, 
         Link: null 
     },
-    Phone: { Caption: "Phone",
-    DataType: Type.DataType.PHONE, 
-    SortType: Type.OrderType.NONE,
-     Display: true, 
-     Link: null 
-    }
+    Phone: { 
+        Caption: "Phone", 
+        DataType: Type.DataType.PHONE, 
+        SortType: Type.OrderType.NONE, 
+        Display: true, 
+        Link: null 
+    },
+    // add to your data structure whwn
+    Links: {Display: false}
   };
     
     // this is optional. This way you can add edit and remove button to each row.
@@ -112,7 +116,62 @@ console.log("-----------------------------------");
   }
 
   table.initHeader(headerData,headerAttributes);
-  //table.initBody(bodyData);
+
+  bodyData = [
+    {
+      Id: 1,
+      FirstName: "Joe",
+      LastName: "Last Name(fully linked)",
+      Phone: 10001,
+      Links: {
+        Id: "id_link",
+        FirstName: "firstname_link",
+        LastName: "lastname_link",
+        Phone: "phone_link"
+      }
+    },
+    { 
+        Id: 2, 
+        FirstName: "Jack", 
+        LastName: "Last Name (lastname has no link)", 
+        Phone: 9101,
+        Links: {
+            Id: "leave a link",
+            FirstName: "leave a link",
+            // last name has no link 
+            Phone: "leave a link"
+            }
+    },
+    { 
+        Id: 3, 
+        FirstName: "Alice", 
+        LastName: "Last Name(links is null)", 
+        Phone: 5678, 
+        // Links set to null
+        Links: null 
+    },
+    { 
+        Id: 4, 
+        FirstName: "Sam", 
+        LastName: "Last Name(links is not defined)", 
+        Phone: 5678 
+        // Links property removed
+    },
+    { 
+        Id: 5, 
+        FirstName: "Peter", 
+        LastName: "Last Name(id's link is null)", 
+        Phone: 1234, 
+        Links: { 
+            Id: null, 
+            FirstName: "leave a link", 
+            LastName: "leave a link", 
+            Phone: "leave a link" 
+            } 
+    }
+  ];
+
+  table.initBody(bodyData);
 /*
 
   let headerAttributes = {

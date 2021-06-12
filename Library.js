@@ -213,6 +213,7 @@ class Table {
         cellElement.innerText = rowData[cellName];
       }
       // checks if the columns' data should be displayed 
+      this.#headerData[cellName] = this.#headerData[cellName] || {};
       if (this.#headerData[cellName].Display === false) {
         cellElement.setAttribute("style", "display: none;");
       }
