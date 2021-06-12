@@ -58,11 +58,14 @@ console.log("-----------------------------------");
   // var table = new Table(body);
 
   // a table can have attributes. you can add as many attrubute as you want. The attributes must be valid
-  let attributes = { id: "idl", class: "table" };
-  var table = new Table(attributes);
+  let attributes = { id: "mainTable", class: "table" };
 
+  var table = new Table(attributes);
   var body = document.getElementById("body");
   body.appendChild(table.getHTMLTable());
+
+
+/*
 
   let headerAttributes = {
     Header: {
@@ -107,15 +110,15 @@ console.log("-----------------------------------");
     },
     {
       Id: 3, FirstName: "Joe", LastName: "Tribiani(lastname has no link)", Phone: 9101, Edit: "Edit Row",
-      /*To remove the remove link, take off the remove property or set the property to null. */
+      // To remove the remove link, take off the remove property or set the property to null. 
       Remove: "Delete Row",
       Links: {
         Id: "abc",
         FirstName: "abc",
-        /* last name has no link */
+        // last name has no link 
         Phone: "phone_link",
         Edit: "/Edit?id=5",
-        /* To disable the link, take off the delete link*/
+        // To disable the link, take off the delete link
         Remove: "/Remove?id=5"
       }
     },
@@ -129,5 +132,5 @@ console.log("-----------------------------------");
 
   let dataFooter = { FirstGap: {}, Id: { Caption: "summery: " }, SecondGap: {}, Sum: { Caption: 2000 } };
   table.initFooter(dataFooter);
-
+*/
 </script>

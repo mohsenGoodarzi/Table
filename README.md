@@ -2,23 +2,23 @@
 
 ## Table
 
-### A simple table
+#### - A simple Html table tag
 ```javascript
 var table = new Table();
+var body = document.getElementById("body");
+  body.appendChild(table.getHTMLTable());
 ```
-##### - Element attributes cab be added to the table.
+##### - How to add attributes to the table.
 ```javascript
 let attributes = { id: "mainTable", class: "table" };
   var table = new Table(attributes);
 ```
-#### - Adding the table to the body.
-
-```JavaScript
-var body = document.getElementById("body");
-  body.appendChild(table.getHTMLTable());
+##### - Result
+```HTML
+<table id="mainTable" class="table"></table>
 ```
 
-#### - Tables' header
+#### - How to add header to the table
   
 ```JavaScript
 let headerData = {
@@ -31,4 +31,6 @@ let headerData = {
     Remove: { Display: true },
     Links: { Display: false }
   };
+   table.initHeader(headerData, headerAttributes);
+  table.initBody(bodyData);
 ```
