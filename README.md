@@ -246,4 +246,5 @@ let bodyData = [
     </tfoot>
 </table>
 ```
-- Notice in each row there is <td style="display: none;">[object Object]</td>. This is an issue which will be addressed in the next update.
+
+- Bootstrap 5 table example:

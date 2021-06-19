@@ -127,6 +127,13 @@ class Table {
       element.setAttribute(attribute, attributes[attribute]);
     }
   }
+setEvents(element, events){
+  for (let event in events){
+console.log(events[event],typeof (events[event]));
+    element.addEventListener(event,events[event]);
+  }
+
+}
 
   initHeader(headerData, attributes = {}) {
 
@@ -206,10 +213,12 @@ class Table {
           rowData.Links[cellName] = "mail:" + rowData.Links[cellName];
         }
 
+        if(typeof(rowData.Links[cellName])!=="object")
         link.setAttribute("href", rowData.Links[cellName]);
         cellElement.appendChild(link);
 
       } else {
+        if(typeof(rowData[cellName])!=="object")
         cellElement.innerText = rowData[cellName];
       }
       // checks if the columns' data should be displayed 
@@ -218,6 +227,10 @@ class Table {
         cellElement.setAttribute("style", "display: none;");
       }
 
+      //adds events if there is any
+      if (rowData.Events[cellName] !== undefined && rowData.Events[cellName] !== null){
+        this.setEvents(cellElement,rowData.Events[cellName]);
+      }  
 
       rowElement.appendChild(cellElement);
 
@@ -252,5 +265,6 @@ class Table {
   get getBodyData() {
     return this.#bodyData;
   }
+
 
 }

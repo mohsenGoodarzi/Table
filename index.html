@@ -8,17 +8,15 @@
   <meta http-equiv="cache-control" content="public">
   <meta http-equiv="" content="X-Content-Type-Options=nosniff" />
   <script src="Library.js"></script>
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="Table.css">
   <title>Document</title>
 </head>
 <body id="body">
 </body>
 </html>
-
-
 <script>
-
- 
 
 // user need to provide the value
 let value = "Mo"; 
@@ -53,12 +51,7 @@ console.log("-----------------------------------");
 
 <script>
 
-
-  // a simple table 
-  // var table = new Table(body);
-
-  // a table can have attributes. you can add as many attrubute as you want. The attributes must be valid
-  let attributes = { id: "mainTable", class: "table" };
+  let attributes = {class: "table table-striped table-borderless table-hover" };
 
   var table = new Table(attributes);
   var body = document.getElementById("body");
@@ -94,28 +87,32 @@ console.log("-----------------------------------");
         Link: null 
     },
     // add to your data structure whwn
-    Links: {Display: false}
-  };
-    
     // this is optional. This way you can add edit and remove button to each row.
-   // Edit: { Display: true },
-   // Remove: { Display: true },
-   // Links: { Display: false }
+    Remove: { Display: true },
+    Links: { Display: false }
+}
    let headerAttributes = {
-    Header: {
-      class: "aaa",
-      id: "ss"
-    },
-    HeaderRow: {
-      id: "id2",
-      class: "trClass"
-    },
+    Header: null,
+    HeaderRow: {class:"theadrow"},
     HeaderCell: {
-      class: "cell-info"
+      scope: "col"
     }
   }
 
   table.initHeader(headerData,headerAttributes);
+
+
+bodyAttributes={
+  Body:{
+class:"hello"
+  },
+BodyRow:{
+scope:"row"
+},
+BodyCell:{
+  class : "cell"
+}
+};
 
   bodyData = [
     {
@@ -123,11 +120,16 @@ console.log("-----------------------------------");
       FirstName: "Joe",
       LastName: "Last Name(fully linked)",
       Phone: 10001,
+      Remove: "Delete",
       Links: {
         Id: "id_link",
         FirstName: "firstname_link",
         LastName: "lastname_link",
-        Phone: "phone_link"
+        Phone: "phone_link",
+        Remove:"#"
+      },
+      Events:{
+        Remove:{click:clickOnMe}
       }
     },
     { 
@@ -135,46 +137,81 @@ console.log("-----------------------------------");
         FirstName: "Jack", 
         LastName: "Last Name (lastname has no link)", 
         Phone: 9101,
+      Remove: "Delete",
         Links: {
             Id: "leave a link",
             FirstName: "leave a link",
             // last name has no link 
-            Phone: "leave a link"
-            }
+            Phone: "leave a link",
+            Remove:"#"
+            },
+            Events:{
+        Remove:{click:clickOnMe}
+      }
     },
     { 
         Id: 3, 
         FirstName: "Alice", 
         LastName: "Last Name(links is null)", 
         Phone: 5678, 
+      Remove: "Delete",
         // Links set to null
-        Links: null 
+        Links: {
+          Remove:"#"
+        },
+        Events:{
+        Remove:{click:clickOnMe}
+      }
     },
     { 
         Id: 4, 
         FirstName: "Sam", 
         LastName: "Last Name(links is not defined)", 
-        Phone: 5678 
-        // Links property removed
+        Phone: 5678,
+      Remove: "Delete",
+     Links:{
+       Remove:"#"
+     },
+     Events:{
+        Remove:{click:clickOnMe}
+      }
     },
     { 
         Id: 5, 
         FirstName: "Peter", 
         LastName: "Last Name(id's link is null)", 
         Phone: 1234, 
+      Remove: "Delete",
         Links: { 
             Id: null, 
             FirstName: "leave a link", 
             LastName: "leave a link", 
-            Phone: "leave a link" 
-            } 
+            Phone: "leave a link",
+            },
+            Events:{
+        Remove:{click:clickOnMe}
+      }
     }
   ];
 
-  table.initBody(bodyData);
+  table.initBody(bodyData,bodyAttributes);
 
   let dataFooter = { FirstGap: {}, Id: { Caption: "Number of people: " }, SecondGap: {}, Sum: { Caption: 5 } };
   table.initFooter(dataFooter);
+
+
+  function clickOnMe(event){
+
+   let goUp = 0;
+   while (true){
+    if(event.path[goUp].localName==="tr"){
+       event.path[goUp].remove();
+       break;
+    }else{
+      goUp++;
+    }
+   }
+  }
 /*
 
   let headerAttributes = {
