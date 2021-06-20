@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class ="list">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Library</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Data</li>
+            </ol>
+          </nav>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Cras justo odio
+              <span class="btn next">></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Dapibus ac facilisis inssssssssss zsfsf sf sdf sty srty aert ay y ad asd ad asd asd a
+              <span class="btn next">></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Morbi leo risus
+              <span class="btn next">></span>
+            </li>
+          </ul>
+    </div>
+</body>
+</html> 
+
+<style>
+    .list{
+        display: table;
+    max-width: 500px;
+    min-width: none;
+    width: 100%;
+    }
+.next{
+    border-radius: 50%;
+    background-color: rgb(117, 117, 245);
+    text-align: center;
+    color: white;
+    padding-left: 14.3px;
+    margin-left: 5px;
+}
+
+.breadcrumb{
+    margin-bottom: 0px;
+}
+
+</style>
+<script>
+    class List{
+
+        #list;
+        #header;
+        #body;
+
+        constructor(){
+            this.#list= document.createElement("div");
+            this.#list.setAttribute("class","list");
+
+            let nav = document.createElement("nav");
+            nav.setAttribute("aria-label","breadcrumb");
+
+           this.#header = document.createElement("ol");
+            ol.setAttribute("class","breadcrumb");
+            
+            nav.appendChild(this.#header);
+            this.#list.appendChild(nav);
+
+        }
+        addToHeader(text,hasLink){
+            let item = document.createElement("li");
+           
+            if (hasLink){
+                item.setAttribute("class","breadcrumb-item");
+                
+                let link = document.createElement("a");
+                link.setAttribute("href","#");
+                link.innerText=text;
+
+                item.appendChild(link);
+            }else{
+                item.setAttribute("class","breadcrumb-item active");
+                item.setAttribute("aria-current","page");
+                item.innerText=text;
+            }
+}
+
+        getHTMLList(){
+            return this.#list;
+        }
+        
+        addToList(){
+            let listItem = document.createElement("li");
+            listItem.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            let btn = document.createElement("span");
+            btn.setAttribute("class","btn next");
+            listItem.appendChild(btn);
+        }
+        removeFromList(){
+
+        }
+        
+        removeFromHeader(){
+
+        }
+    }
+</script>
