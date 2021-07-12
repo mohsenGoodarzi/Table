@@ -70,7 +70,7 @@ console.log("-----------------------------------");
         DataType: Type.DataType.STRING, 
         SortType: Type.OrderType.NONE, 
         Display: true, 
-        Link: "https://google.com" 
+        Link: "https://www.google.com/search?q=firstName" 
     },
     LastName: { 
         Caption: "Last Name",
@@ -86,10 +86,10 @@ console.log("-----------------------------------");
         Display: true, 
         Link: null 
     },
-    // add to your data structure whwn
     // this is optional. This way you can add edit and remove button to each row.
     Remove: { Display: true },
-    Links: { Display: false }
+    Links: { Display: false },
+    Events:{Display : false}
 }
    let headerAttributes = {
     Header: null,
@@ -125,7 +125,7 @@ BodyCell:{
         Id: "id_link",
         FirstName: "firstname_link",
         LastName: "lastname_link",
-        Phone: "phone_link",
+        Phone: "10001",
         Remove:"#"
       },
       Events:{
@@ -142,7 +142,7 @@ BodyCell:{
             Id: "leave a link",
             FirstName: "leave a link",
             // last name has no link 
-            Phone: "leave a link",
+            Phone: "9101",
             Remove:"#"
             },
             Events:{
@@ -186,7 +186,7 @@ BodyCell:{
             Id: null, 
             FirstName: "leave a link", 
             LastName: "leave a link", 
-            Phone: "leave a link",
+            Phone: "1234",
             },
             Events:{
         Remove:{click:clickOnMe}
